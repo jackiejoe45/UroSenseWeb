@@ -1,0 +1,173 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f0f0f0;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid #aaa;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #ddd;
+}
+
+.user-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.user-info p {
+    margin: 0;
+    flex: 1 1 10px; /* Adjust the width as needed */
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 3%;
+    margin-bottom: 20px;
+}
+
+.sidebar {
+    width: 60px;
+    background-color: #2f4f4f;
+    height: 100%;
+    position: fixed;
+}
+
+.content {
+    margin-left: 60px;
+    padding: 20px;
+    width: calc(100% - 60px);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #333;
+}
+.logo img {
+    max-width: 10%;
+    max-height: fit-content;
+} 
+
+.user-info {
+    margin: 20px 0;
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 15%;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 0;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    height: 30%;
+    width: 100%;
+}
+
+.card-header img {
+    height: 100%;
+    margin-right: 10px;
+}
+
+.card-measurement {
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+}
+
+.card-status {
+    height: 10%;
+    width: fit-content;
+    border-radius: 4%;
+    margin-top: 0;
+    margin-bottom: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9em;
+}
+
+/*different color per card*/
+
+.card-footer {
+    height: 30%;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 0;
+    padding-top: 10%;
+}
+
+
+#history-records {
+    max-height: 30vh; /* 30% of the viewport height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+    margin-left: auto; /* Pushes the nav to the extreme right */
+    display: flex;
+}
+
+nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #333;
+}
+
+nav a.active {
+    font-weight: bold;
+    color: #007BFF; /* Highlight color for active page */
+}
+
+

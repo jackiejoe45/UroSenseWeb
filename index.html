@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .invisible {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <img src="assets/logo.png">
+            </div>
+            <nav>
+                <a href="#" class="active">Home</a>
+                <a href="#">Support</a>
+                <a href="#">Account</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- <h1>Lab Dashboard</h1> -->
+
+    <div class="user-info">
+        <p class="name invisible">Name:Ben</p>
+        <p class="gender invisible">Gender: Male</p>
+        <p class="age invisible">Age: 26</p>
+        <p class="time">Last Result Time: 2023-02-15 10:00:00</p>
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <div class="card-header">
+                <img src="assets/glucose-icon.png" alt="Glucose">
+                <span>Glucose</span>
+            </div>
+            <div class="card-measurement">90 mg/dl</div>
+            <div class="card-status" style="background-color: #F8DEBD;">Normal</div>
+            <div class="card-footer" style="background-image: url('assets/glucose-chart.png');"></div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <img src="assets/blood-icon.png" alt="Blood">
+                <span>Blood</span>
+            </div>
+            <div class="card-measurement">150 Ery/μl</div>
+            <div class="card-status" style="background-color: #FBF0F3;">Normal</div>
+            <div class="card-footer" style="background-image: url('assets/blood-chart.png');"></div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <img src="assets/protein-icon.png" alt="Protein">
+                <span>Protein</span>
+            </div>
+            <div class="card-measurement">65 mg/dl</div>
+            <div class="card-status" style="background-color: #D0FBFF;">Normal</div>
+            <div class="card-footer" style="background-image: url('assets/protein-chart.png');"></div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <img src="assets/specific-gravity-icon.png" alt="Specific Gravity">
+                <span>Specific Gravity</span>
+            </div>
+            <div class="card-measurement">1.009</div>
+            <div class="card-status" style="background-color: #F7C2FF;">Normal</div>
+            <div class="card-footer" style="background-image: url('assets/specific-gravity-chart.png');"></div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <img src="assets/ph-icon.png" alt="pH">
+                <span>pH</span>
+            </div>
+            <div class="card-measurement">7.5</div>
+            <div class="card-status" style="background-color: #F8BDBD;">Normal</div>
+            <div class="card-footer" style="background-image: url('assets/ph-chart.png');"></div>
+        </div>
+    </div>
+
+    <div id="history-records" class="history-table">Loading...</div>
+
+    <script>
+        function fetchData() {
+            const username = "Ben"; // Ensure this is the correct username
+            fetch(`data.php?username=${encodeURIComponent(username)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.latest) {
+                        document.querySelector('.card:nth-child(1) .card-measurement').textContent = `${data.latest.glucose} mg/dL`;
+                        document.querySelector('.card:nth-child(2) .card-measurement').textContent = `${data.latest.blood} Ery/μl`;
+                        document.querySelector('.card:nth-child(3) .card-measurement').textContent = `${data.latest.protein} mg/dl`;
+                        document.querySelector('.card:nth-child(4) .card-measurement').textContent = `${data.latest.specific_gravity}`;
+                        document.querySelector('.card:nth-child(5) .card-measurement').textContent = `${data.latest.ph}`;
+                        document.querySelector('.user-info p:nth-child(4)').textContent = `Last Result Time: ${data.latest.record_time}`;
+                    } else {
+                        console.error('No latest data available.');
+                    }
+
+                    if (data.history && data.history.length > 0) {
+                        let historyHTML = "<table><tr>";
+                        for (let key in data.history[0]) {
+                            historyHTML += `<th>${key}</th>`;
+                        }
+                        historyHTML += "</tr>";
+                        data.history.forEach(row => {
+                            historyHTML += "<tr>";
+                            for (let key in row) {
+                                historyHTML += `<td>${row[key]}</td>`;
+                            }
+                            historyHTML += "</tr>";
+                        });
+                        historyHTML += "</table>";
+                        document.getElementById("history-records").innerHTML = historyHTML;
+                    } else {
+                        document.getElementById("history-records").innerHTML = "<p>No historical data available.</p>";
+                    }
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+
+        fetchData();
+        setInterval(fetchData, 5000);
+    </script>
+
+</body>
+</html>
